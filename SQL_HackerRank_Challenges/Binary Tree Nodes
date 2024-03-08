@@ -1,0 +1,26 @@
+--Advanced select: Every node is listed in N. But only some appear in column P. Hence, what makes them a 'Root' or an 'Inner' depends on the P column. Starting with the 
+'Root', if P is null, which means there is no parent, then that node is a 'Root'. When we exclude those who are 'Root', whatever nodes listed in column P are the 'Inner'. The rest in N that are not in column P is 'Leaf'
+-- Solution 1: Using IN to compare N with a list of distinct p using SELECT
+SELECT n,
+       CASE
+           WHEN p IS NULL THEN 'Root'
+           WHEN n in
+                  (SELECT distinct(p)
+                   FROM bst) THEN 'Inner'
+           ELSE 'Leaf'
+       END
+FROM bst
+ORDER BY n;
+
+-- Option 2: Using EXISTS -> the subquery returns a result following the condition WHERE, the EXISTS function verifies whether a particular record ('1') exists
+SELECT n,
+       CASE
+           WHEN p IS NULL THEN 'Root'
+           WHEN EXISTS
+                  (SELECT 1
+                   FROM bst
+                   WHERE p = b.n ) THEN 'Inner'
+           ELSE 'Leaf'
+       END
+FROM bst b
+ORDER BY n;
