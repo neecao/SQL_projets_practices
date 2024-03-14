@@ -1,1 +1,21 @@
+--https://8weeksqlchallenge.com/case-study-1/ 
 
+/* --------------------
+   Case Study Questions
+   --------------------*/
+
+-- 1. What is the total amount each customer spent at the restaurant?
+        SELECT 
+            s.customer_id, SUM(price)
+        FROM
+            sales s
+                LEFT JOIN
+            menu ON menu.product_id = s.product_id
+        GROUP BY s.customer_id
+
+-- 2. How many days has each customer visited the restaurant?
+        SELECT 
+            customer_id, COUNT(order_date)
+        FROM
+            sales
+        GROUP BY customer_id
