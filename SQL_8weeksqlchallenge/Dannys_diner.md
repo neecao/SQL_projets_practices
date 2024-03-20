@@ -1,10 +1,8 @@
 --https://8weeksqlchallenge.com/case-study-1/ 
 
-/* --------------------
-   Case Study Questions
-   --------------------*/
 
--- 1. What is the total amount each customer spent at the restaurant?
+
+### 1. What is the total amount each customer spent at the restaurant?
         SELECT 
             s.customer_id, SUM(price)
         FROM
@@ -102,7 +100,7 @@
             WHERE  tbl.first_order = sales.order_date
             ORDER  BY customer_id 
 
--- 8. What is the total items and amount spent for each member before they became a member?
+### 8. What is the total items and amount spent for each member before they became a member?
       SELECT 
           members.customer_id, COUNT(sales.product_id), SUM(price)
       FROM
@@ -171,3 +169,9 @@
              SUM(point)
       FROM   customer_point
       GROUP  BY customer_id 
+
+
+### Results/Findings
+
+### Recommendations
+
