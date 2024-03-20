@@ -1,7 +1,12 @@
---https://8weeksqlchallenge.com/case-study-1/ 
+# Case Study #1 - Danny's Diner
 
+## Project overview
+For full information [8weeksqlchallenge](https://8weeksqlchallenge.com/case-study-1/ )
 
+## Tools
+mysql
 
+## Key questions & Solutions
 ### 1. What is the total amount each customer spent at the restaurant?
         SELECT 
             s.customer_id, SUM(price)
@@ -11,14 +16,14 @@
             menu ON menu.product_id = s.product_id
         GROUP BY s.customer_id
 
--- 2. How many days has each customer visited the restaurant?
+### 2. How many days has each customer visited the restaurant?
             SELECT 
              customer_id, COUNT(order_date) as Number_of_visits
          FROM
              sales
          GROUP BY customer_id
 
--- 3. What was the first item from the menu purchased by each customer?
+### 3. What was the first item from the menu purchased by each customer?
       SELECT customer_id,
              product_name
       FROM   (SELECT s.customer_id,
@@ -32,7 +37,7 @@
                        ON menu.product_id = s.product_id) sub
       WHERE  rn = 1 
 
--- 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
+### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
          SELECT 
              product_name, COUNT(*) AS Count_order
          FROM
@@ -43,7 +48,7 @@
          ORDER BY Count_order DESC
          LIMIT 1
 
--- 5. Which item was the most popular for each customer?
+### 5. Which item was the most popular for each customer?
       WITH tbl
            AS (SELECT s.customer_id,
                       product_name,
@@ -62,7 +67,7 @@
       FROM   tbl
       WHERE  ranking = 1 
 
--- 6. Which item was purchased first by the customer after they became a member?
+### 6. Which item was purchased first by the customer after they became a member?
       WITH tbl
            AS (SELECT s.customer_id,
                       Min(order_date) AS first_order
@@ -81,7 +86,7 @@
       WHERE  tbl.first_order = sales.order_date
       ORDER  BY customer_id 
 
--- 7. Which item was purchased just before the customer became a member?
+### 7. Which item was purchased just before the customer became a member?
        WITH tbl
                  AS (SELECT s.customer_id,
                             max(order_date) AS first_order
@@ -113,7 +118,7 @@
           order_date < join_date
       GROUP BY members.customer_id
 
--- 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+### 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
       SELECT sub.customer_id,
              Sum(price),
              Sum(points)
@@ -129,8 +134,7 @@
                        ON sales.product_id = menu.product_id) sub
       GROUP  BY sub.customer_id 
 
--- 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items,
---not just sushi - how many points do customer A and B have at the end of January?
+### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
       WITH tbl
            AS (SELECT s.customer_id,
                       order_date,
