@@ -16,6 +16,9 @@ mysql
             menu ON menu.product_id = s.product_id
         GROUP BY s.customer_id
 
+
+<img width="112" alt="Capture d’écran 2024-04-18 211249" src="https://github.com/neecao/master/assets/85617864/9ee707af-1b34-4141-b390-813f6a501ea7">
+
 ### 2. How many days has each customer visited the restaurant?
             SELECT 
              customer_id, COUNT(order_date) as Number_of_visits
