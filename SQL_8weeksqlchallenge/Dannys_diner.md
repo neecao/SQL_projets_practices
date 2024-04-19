@@ -26,6 +26,9 @@ mysql
              sales
          GROUP BY customer_id
 
+<img width="139" alt="Capture d’écran 2024-04-19 084118" src="https://github.com/neecao/master/assets/85617864/002bbf31-c76c-4c42-816e-aa8ac1d5de3b">
+
+
 ### 3. What was the first item from the menu purchased by each customer?
       SELECT customer_id,
              product_name
