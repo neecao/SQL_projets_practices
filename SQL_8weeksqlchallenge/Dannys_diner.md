@@ -20,21 +20,21 @@ mysql
 <img width="112" alt="Capture d’écran 2024-04-18 211249" src="https://github.com/neecao/master/assets/85617864/9ee707af-1b34-4141-b390-813f6a501ea7">
 
 ### 2. How many days has each customer visited the restaurant?
-            SELECT 
-             customer_id, COUNT(order_date) as Number_of_visits
-         FROM
-             sales
-         GROUP BY customer_id
+             SELECT 
+         customer_id, COUNT(distinct(order_date)) as Number_of_visits
+     FROM
+         sales
+     GROUP BY customer_id
 
-<img width="139" alt="Capture d’écran 2024-04-19 084118" src="https://github.com/neecao/master/assets/85617864/002bbf31-c76c-4c42-816e-aa8ac1d5de3b">
+<img width="142" alt="1" src="https://github.com/neecao/master/assets/85617864/222816e1-4172-4a54-9c8c-325ff66aad72">
 
 
 ### 3. What was the first item from the menu purchased by each customer?
-      SELECT customer_id,
+     SELECT customer_id,
              product_name
       FROM   (SELECT s.customer_id,
                      product_name,
-                     Row_number ()
+                     dense_rank ()
                        OVER(
                          partition BY s.customer_id
                          ORDER BY order_date) AS rn
@@ -42,8 +42,15 @@ mysql
                      JOIN menu
                        ON menu.product_id = s.product_id) sub
       WHERE  rn = 1 
+      GROUP BY customer_id, product_name;
 
-<img width="130" alt="1" src="https://github.com/neecao/master/assets/85617864/a3c6e998-ad3d-4840-8d98-e1518f7a0fca">
+Result with ROW_NUMBER
+
+<img width="128" alt="3" src="https://github.com/neecao/master/assets/85617864/3e970e6d-3bdb-4431-a116-c00a8ca2c3d7">
+
+Result with DENSE_RANK
+
+<img width="131" alt="1" src="https://github.com/neecao/master/assets/85617864/50fd5d67-047b-4f8c-b2fb-4fe1fc1d41c6">
 
 
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
@@ -77,8 +84,8 @@ mysql
              product_name
       FROM   tbl
       WHERE  ranking = 1 
-
-<img width="130" alt="3" src="https://github.com/neecao/master/assets/85617864/af31ab29-0e9f-414f-a0f0-8c4d5ee12c79">
+      
+<img width="187" alt="4" src="https://github.com/neecao/master/assets/85617864/98bfda11-d6d0-4238-b19f-ee17c6ca541c">
 
 ### 6. Which item was purchased first by the customer after they became a member?
       WITH tbl
@@ -87,7 +94,7 @@ mysql
                FROM   sales s
                       JOIN members m
                         ON m.customer_id = s.customer_id
-               WHERE  order_date >= join_date
+               WHERE  order_date > join_date
                GROUP  BY s.customer_id)
       SELECT tbl.customer_id,
              product_name
@@ -99,7 +106,8 @@ mysql
       WHERE  tbl.first_order = sales.order_date
       ORDER  BY customer_id 
 
-<img width="136" alt="7" src="https://github.com/neecao/master/assets/85617864/100c0fc6-0834-4e70-bb49-85ec17dd6415">
+<img width="129" alt="5" src="https://github.com/neecao/master/assets/85617864/e7c3dcf4-a5d6-49c5-81b4-e929409d553c">
+
 
 ### 7. Which item was purchased just before the customer became a member?
        WITH tbl
