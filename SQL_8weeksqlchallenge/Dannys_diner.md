@@ -43,6 +43,9 @@ mysql
                        ON menu.product_id = s.product_id) sub
       WHERE  rn = 1 
 
+<img width="130" alt="1" src="https://github.com/neecao/master/assets/85617864/a3c6e998-ad3d-4840-8d98-e1518f7a0fca">
+
+
 ### 4. What is the most purchased item on the menu and how many times was it purchased by all customers?
          SELECT 
              product_name, COUNT(*) AS Count_order
@@ -53,6 +56,8 @@ mysql
          GROUP BY product_name
          ORDER BY Count_order DESC
          LIMIT 1
+
+<img width="147" alt="2" src="https://github.com/neecao/master/assets/85617864/c0b105f1-d492-429c-8ef8-75bdd643f42e">
 
 ### 5. Which item was the most popular for each customer?
       WITH tbl
@@ -73,6 +78,8 @@ mysql
       FROM   tbl
       WHERE  ranking = 1 
 
+<img width="130" alt="3" src="https://github.com/neecao/master/assets/85617864/af31ab29-0e9f-414f-a0f0-8c4d5ee12c79">
+
 ### 6. Which item was purchased first by the customer after they became a member?
       WITH tbl
            AS (SELECT s.customer_id,
@@ -92,6 +99,8 @@ mysql
       WHERE  tbl.first_order = sales.order_date
       ORDER  BY customer_id 
 
+<img width="136" alt="7" src="https://github.com/neecao/master/assets/85617864/100c0fc6-0834-4e70-bb49-85ec17dd6415">
+
 ### 7. Which item was purchased just before the customer became a member?
        WITH tbl
                  AS (SELECT s.customer_id,
@@ -110,6 +119,8 @@ mysql
                      ON sales.product_id = menu.product_id
             WHERE  tbl.first_order = sales.order_date
             ORDER  BY customer_id 
+            
+<img width="142" alt="7" src="https://github.com/neecao/master/assets/85617864/772f476c-ac27-45e8-bf9d-102b289d2c55">
 
 ### 8. What is the total items and amount spent for each member before they became a member?
       SELECT 
@@ -123,6 +134,9 @@ mysql
       WHERE
           order_date < join_date
       GROUP BY members.customer_id
+
+<img width="217" alt="1" src="https://github.com/neecao/master/assets/85617864/0ce7d5c6-7c3b-4265-89f7-5c5130aaf5dc">
+
 
 ### 9.  If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
       SELECT sub.customer_id,
@@ -139,6 +153,8 @@ mysql
                      JOIN menu
                        ON sales.product_id = menu.product_id) sub
       GROUP  BY sub.customer_id 
+
+<img width="170" alt="2" src="https://github.com/neecao/master/assets/85617864/e0bf064f-818d-4e2b-839c-929c9b912c00">
 
 ### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
       WITH tbl
@@ -179,6 +195,8 @@ mysql
              SUM(point)
       FROM   customer_point
       GROUP  BY customer_id 
+
+<img width="125" alt="3" src="https://github.com/neecao/master/assets/85617864/88bba976-5edd-41bb-9290-dc4ecc93b367">
 
 
 ### Results/Findings
