@@ -191,7 +191,7 @@ Result with DENSE_RANK
                         WHEN product_name = 'sushi' THEN price * 20
                         WHEN member = 'Y'
                              AND product_name <> 'sushi'
-                             AND ( order_date BETWEEN join_date AND Date_add(join_date, interval 7 day) )
+                             AND ( order_date BETWEEN join_date AND Date_add(join_date, interval 6 day) )
                                  THEN price *20
                                  ELSE price * 10
                       END AS point
@@ -204,7 +204,7 @@ Result with DENSE_RANK
       FROM   customer_point
       GROUP  BY customer_id 
 
-<img width="125" alt="3" src="https://github.com/neecao/master/assets/85617864/88bba976-5edd-41bb-9290-dc4ecc93b367">
+<img width="118" alt="2" src="https://github.com/neecao/master/assets/85617864/b6070cb8-b452-4cfc-b4f6-e1abcdcee417">
 
 
 ### Results/Findings
