@@ -165,11 +165,19 @@ Result with DENSE_RANK
 <img width="170" alt="2" src="https://github.com/neecao/master/assets/85617864/e0bf064f-818d-4e2b-839c-929c9b912c00">
 
 ### 10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+
+I first create a master table called tbl that joins all the sales records, member’s info and menu. I then used CASE function to add a column named member to classifie if that order is made when that customer is a member (order_date>= join_date = ‘Y’) or not yet a member (Else ‘N’). 
+
+I then create another table called customer_point to calculate points using CASE. If the product_name = sushi, then multiply price by 20. When customer is the member (column member=Y), the product is not sushi (<> sushi), and the order_date is within the first week since the member join_date (join_date + interval 6 day), then price is multiplied by 20. Else other case price is multiplied by 10.
+
+Select customer_id, aggregate function SUM of point from table customer_point, group by customer_id.
+
       WITH tbl
            AS (SELECT s.customer_id,
                       order_date,
                       s.product_id,
                       product_name,
+                      join_date,
                       price,
                       CASE
                         WHEN join_date IS NOT NULL
@@ -196,8 +204,6 @@ Result with DENSE_RANK
                                  ELSE price * 10
                       END AS point
                FROM   tbl
-                      left join members
-                             ON members.customer_id = tbl.customer_id
                WHERE  Month(order_date) < 2)
       SELECT customer_id,
              SUM(point)
@@ -209,5 +215,40 @@ Result with DENSE_RANK
 
 ### Results/Findings
 
+1. What is the total amount each customer spent at the restaurant?
+Customer A spent the most at the restaurant, 76USD, followed by Customer B comes with 74 USD. Customer C comes in third with 36 USD
+
+3. How many days has each customer visited the restaurant?
+Customer A visited the restaurants 4 days
+Customer B visited the restaurants 6 days
+Customer C visited the restaurants 2 days
+
+4. What was the first item from the menu purchased by each customer?
+Customer A bought sushi and curry first, customer B bought curry and lastly customer C bought ramen in his first order
+
+6. What is the most purchased item on the menu and how many times was it purchased by all customers?
+The most popular item in the menu is ramen, which was bought 8 times
+
+8. Which item was the most popular for each customer?
+Customer A’s and C’s most ordered dish is ramen. Meanwhile customer B ordered equally ramen, sushi and curry
+
+9. Which item was purchased first by the customer after they became a member?
+After became member, customer A bought ramen while customer B bought sushi
+10. Which item was purchased just before the customer became a member?
+Before became a member, customer A bought sushi and curry: customer B bought sushi
+
+11. What is the total items and amount spent for each member before they became a member?
+Before they become a member, customer A had order 2 times, accounted for 25USD; customer B had order 3 times with the total sum of 40USD
+
+12. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?
+Customer A has accumulated 860pts, customer B 940pts, and customer C 360pts
+13. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?
+Since their points are doubled on all items during the first week after joining the membership program, customer A has 1370pts, customer B has 9820pts, and customer C receive 360pts at the end of January
+
+
 ### Recommendations
+Customer A has accumulated the highest value thus far, totaling $76 over 4 visits. Customer B has made 6 visits, yet their total order value is lower than that of Customer A. 
+Danny should conduct a more in-depth analysis of Customer A to create a suitable customer persona and attract more customers with similar characteristics.
+
+Despite ramen being the bestseller, both Customer A and B opted to become members after ordering sushi. Furthermore, Customer B continued to order sushi right after becoming a member, indicating that sushi might be the decisive factor in their decision to join
 
