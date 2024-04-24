@@ -14,6 +14,9 @@ mysql
 - [Results/Findings](https://github.com/neecao/master/new/master/SQL_8weeksqlchallenge#resultsfindings)
 - [Recommendations](https://github.com/neecao/master/new/master/SQL_8weeksqlchallenge#recommendations)
 ### The Dataset Schema
+<img width="491" alt="Capture d'écran 2024-04-24 214927" src="https://github.com/neecao/master/assets/85617864/475e24f5-95de-4041-a171-d3acc795741c">
+
+
 ### Data cleaning process
 ### Case Study Questions + Solutions
 ### Bonus Questions + Solutions
