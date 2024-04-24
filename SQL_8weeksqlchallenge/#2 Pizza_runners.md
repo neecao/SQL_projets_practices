@@ -1,7 +1,7 @@
-# Case Study #1 - Danny's Diner
+# Case Study #2 - Pizza Runner
 
 ## Project overview
-For full information [8weeksqlchallenge](https://8weeksqlchallenge.com/case-study-2/)
+Prease refer to [8weeksqlchallenge](https://8weeksqlchallenge.com/case-study-2/) for full information 
 
 ## Tools
 mysql
@@ -19,3 +19,4 @@ mysql
 ### Bonus Questions + Solutions
 ### Results/Findings
 ### Recommendations
+cfsfee
