@@ -25,7 +25,6 @@ mysql
 ### Data cleaning process
 Treating null values and formating data types in the customer_orders and runner_orders tables
 
-
 ##### Original runner_orders table
 <img width="382" alt="Capture d'écran 2024-04-25 213617" src="https://github.com/neecao/master/assets/85617864/79c57147-a352-4888-b793-6a528568148b">
 
@@ -58,7 +57,32 @@ Treating null values and formating data types in the customer_orders and runner_
 ##### Cleaned version
 <img width="376" alt="Capture d’écran 2024-04-25 213041" src="https://github.com/neecao/master/assets/85617864/e92814c2-3e71-4c5b-aa2d-d0f1abab317b">
 
+##### Original customer_orders table
+<img width="328" alt="2" src="https://github.com/neecao/master/assets/85617864/73530827-5863-45bf-ae27-98cabd5889e4">
 
+##### Steps taken: 
+- Format empty cell in exclusions and extras to have null value
+
+        CREATE temporary TABLE customer_orders_temp
+          SELECT order_id,
+                 customer_id,
+                 pizza_id,
+                 CASE
+                   WHEN exclusions = 'null' THEN NULL
+                   WHEN exclusions = '' THEN NULL
+                   ELSE exclusions
+                 end AS exclusions,
+                 CASE
+                   WHEN extras = 'null' THEN NULL
+                   WHEN extras = '' THEN NULL
+                   ELSE extras
+                 end AS extras
+          FROM   customer_orders;
+  
+  ##### Cleaned version
+<img width="233" alt="1" src="https://github.com/neecao/master/assets/85617864/d2bf5185-a05b-430a-9664-ea5130798b0f">
+
+  
 <div id='question'/>
 
 ### Case Study Questions + Solutions
