@@ -23,6 +23,10 @@ mysql
 <div id='clean'/>
   
 ### Data cleaning process
+Treating null values and formating data types in the customer_orders and runner_orders tables
+
+<img width="376" alt="Capture d’écran 2024-04-25 213041" src="https://github.com/neecao/master/assets/85617864/e92814c2-3e71-4c5b-aa2d-d0f1abab317b">
+
 
 <div id='question'/>
 
