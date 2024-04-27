@@ -32,28 +32,27 @@ Treating null values and formating data types in the customer_orders and runner_
 - Format column distance and duration to contain only numerical values
 - Format empty cell to have null value
 
-      CREATE temporary TABLE runner_orders_temp
-      SELECT order_id,
-             runner_id,
-             CASE
-               WHEN pickup_time = 'null' THEN NULL
-               ELSE pickup_time
-             end AS pickup_time,
-             CASE
-               WHEN distance = 'null' THEN NULL
-               ELSE REPLACE(distance, 'km', '')
-             end AS distance,
-             CASE
-               WHEN duration = '' THEN NULL
-               WHEN duration = 'null' THEN NULL
-               ELSE Regexp_replace(duration, '[a-z]+', '')
-             end AS duration,
-             CASE
-               WHEN cancellation = '' THEN NULL
-               WHEN cancellation = 'null' THEN NULL
-               ELSE cancellation
-             end AS cancellation
-      FROM   runner_orders;  
+          CREATE temporary TABLE runner_orders_temp
+          SELECT order_id,
+                 runner_id,
+                 CASE
+                   WHEN pickup_time = 'null' THEN NULL
+                   ELSE pickup_time
+                 end AS pickup_time,
+                 CASE
+                   WHEN distance = 'null' THEN NULL
+                   ELSE REPLACE(distance, 'km', '')
+                 end AS distance,
+                 CASE
+                   WHEN duration = '' or duration = 'null' THEN NULL
+                   ELSE Regexp_replace(duration, '[a-z]+', '')
+                 end AS duration,
+                 CASE
+                   WHEN cancellation = '' or cancellation = 'null' THEN NULL
+                   ELSE cancellation
+                 end AS cancellation
+          FROM   runner_orders;
+  
 ##### Cleaned version
 <img width="376" alt="Capture d’écran 2024-04-25 213041" src="https://github.com/neecao/master/assets/85617864/e92814c2-3e71-4c5b-aa2d-d0f1abab317b">
 
@@ -68,19 +67,19 @@ Treating null values and formating data types in the customer_orders and runner_
                  customer_id,
                  pizza_id,
                  CASE
-                   WHEN exclusions = 'null' THEN NULL
-                   WHEN exclusions = '' THEN NULL
-                   ELSE exclusions
-                 end AS exclusions,
-                 CASE
-                   WHEN extras = 'null' THEN NULL
-                   WHEN extras = '' THEN NULL
-                   ELSE extras
-                 end AS extras
+                    when exclusions ='null' or exclusions =''then null
+                    else exclusions
+                    end as exclusions,
+                    case
+                    when extras ='null' or extras = '' then null
+                    else extras
+                    end as extras,
+                  order_time
           FROM   customer_orders;
   
   ##### Cleaned version
-<img width="233" alt="1" src="https://github.com/neecao/master/assets/85617864/d2bf5185-a05b-430a-9664-ea5130798b0f">
+<img width="326" alt="Capture d’écran 2024-04-27 172813" src="https://github.com/neecao/master/assets/85617864/d709559b-3379-4ac8-87f6-08403bff8617">
+
 
   
 <div id='question'/>
