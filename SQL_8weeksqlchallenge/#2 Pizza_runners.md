@@ -32,26 +32,30 @@ Treating null values and formating data types in the customer_orders and runner_
 - Format column distance and duration to contain only numerical values
 - Format empty cell to have null value
 
-          CREATE temporary TABLE runner_orders_temp
-          SELECT order_id,
-                 runner_id,
-                 CASE
-                   WHEN pickup_time = 'null' THEN NULL
-                   ELSE pickup_time
-                 end AS pickup_time,
-                 CASE
-                   WHEN distance = 'null' THEN NULL
-                   ELSE REPLACE(distance, 'km', '')
-                 end AS distance,
-                 CASE
-                   WHEN duration = '' or duration = 'null' THEN NULL
-                   ELSE Regexp_replace(duration, '[a-z]+', '')
-                 end AS duration,
-                 CASE
-                   WHEN cancellation = '' or cancellation = 'null' THEN NULL
-                   ELSE cancellation
-                 end AS cancellation
-          FROM   runner_orders;
+             CREATE temporary TABLE runner_orders_temp
+      SELECT order_id,
+             runner_id,
+             CASE
+               WHEN pickup_time = 'null' THEN ''
+               ELSE pickup_time
+             end AS pickup_time,
+             CASE
+               WHEN distance = 'null' THEN ''
+               ELSE REPLACE(distance, 'km', '')
+             end AS distance,
+             CASE
+               WHEN duration = ''
+                     OR duration = 'null' THEN ''
+               ELSE Regexp_replace(duration, '[a-z]+', '')
+             end AS duration,
+             CASE
+               WHEN cancellation = ''
+                     OR cancellation = 'null'
+                     OR cancellation IS NULL THEN ''
+               ELSE cancellation
+             end AS cancellation
+      FROM   runner_orders; 
+  
   
 ##### Cleaned version
 <img width="376" alt="Capture d’écran 2024-04-25 213041" src="https://github.com/neecao/master/assets/85617864/e92814c2-3e71-4c5b-aa2d-d0f1abab317b">
