@@ -84,7 +84,11 @@ Treating null values and formating data types in the customer_orders and runner_
   ##### Cleaned version
 <img width="326" alt="Capture d’écran 2024-04-27 172813" src="https://github.com/neecao/master/assets/85617864/d709559b-3379-4ac8-87f6-08403bff8617">
 
-
+SET SQL_MODE='ALLOW_INVALID_DATES';
+ALTER TABLE runner_orders_temp
+  modify COLUMN distance FLOAT NULL,
+  modify COLUMN duration FLOAT NULL,
+  modify COLUMN pickup_time DATETIME; 
   
 <div id='question'/>
 
