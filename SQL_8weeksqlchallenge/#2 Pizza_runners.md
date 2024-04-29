@@ -23,8 +23,8 @@ mysql
 <div id='clean'/>
   
 ### Data cleaning process
+  
 Treating null values and formating data types in the customer_orders and runner_orders tables
-
 ##### Original runner_orders table
 <img width="382" alt="Capture d'écran 2024-04-25 213617" src="https://github.com/neecao/master/assets/85617864/79c57147-a352-4888-b793-6a528568148b">
 
@@ -56,6 +56,14 @@ Treating null values and formating data types in the customer_orders and runner_
              end AS cancellation
       FROM   runner_orders; 
   
+- Update data type for column pickup_time (varchar -> datetime), duration (varchar->float), distance (varchar->float)
+- Any solution to modify data type returns errors because of null values. I had to change SQL setting temporarily to accept invalide value date.
+  
+      SET SQL_MODE='ALLOW_INVALID_DATES';
+      ALTER TABLE runner_orders_temp
+        modify COLUMN distance FLOAT NULL,
+        modify COLUMN duration FLOAT NULL,
+        modify COLUMN pickup_time DATETIME;
   
 ##### Cleaned version
 <img width="376" alt="Capture d’écran 2024-04-25 213041" src="https://github.com/neecao/master/assets/85617864/e92814c2-3e71-4c5b-aa2d-d0f1abab317b">
@@ -84,12 +92,7 @@ Treating null values and formating data types in the customer_orders and runner_
   ##### Cleaned version
 <img width="326" alt="Capture d’écran 2024-04-27 172813" src="https://github.com/neecao/master/assets/85617864/d709559b-3379-4ac8-87f6-08403bff8617">
 
-SET SQL_MODE='ALLOW_INVALID_DATES';
-ALTER TABLE runner_orders_temp
-  modify COLUMN distance FLOAT NULL,
-  modify COLUMN duration FLOAT NULL,
-  modify COLUMN pickup_time DATETIME; 
-  
+
 <div id='question'/>
 
 ### Case Study Questions + Solutions
