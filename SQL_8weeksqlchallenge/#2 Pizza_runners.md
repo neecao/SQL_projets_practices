@@ -56,7 +56,7 @@ Treating null values and formating data types in the customer_orders and runner_
              end AS cancellation
       FROM   runner_orders; 
   
-- Update data type for column pickup_time (varchar -> datetime), duration (varchar->float), distance (varchar->float)
+- Update data type for column pickup_time (varchar :arrow_right: datetime), duration (varchar:arrow_right:float), distance (varchar:arrow_right:float)
 - Any solution to modify data type returns errors because of null values. I had to change SQL setting temporarily to accept invalide value date.
   
       SET SQL_MODE='ALLOW_INVALID_DATES';
@@ -99,6 +99,16 @@ Treating null values and formating data types in the customer_orders and runner_
 <div id='question'/>
 
 ### Case Study Questions + Solutions
+#### A. Pizza Metrics
+1. How many pizzas were ordered?
+   
+    SELECT 
+        COUNT(pizza_id) AS total_pizza
+    FROM
+        customer_orders_temp
+
+<img width="61" alt="Capture d'écran 2024-04-29 204215" src="https://github.com/neecao/master/assets/85617864/4f8ae80c-18c8-4322-a480-d2dcade2b460">
+
 
 <div id='bonus'/>
 
