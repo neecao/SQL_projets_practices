@@ -30,7 +30,7 @@ Treating null values and formating data types in the customer_orders and runner_
 
 ##### Steps taken: 
 - Format column distance and duration to contain only numerical values
-- Format empty cell to have null value
+- Format null value or 'null' string to be blank
 
              CREATE temporary TABLE runner_orders_temp
       SELECT order_id,
@@ -66,13 +66,16 @@ Treating null values and formating data types in the customer_orders and runner_
         modify COLUMN pickup_time DATETIME;
   
 ##### Cleaned version
-<img width="376" alt="Capture d’écran 2024-04-25 213041" src="https://github.com/neecao/master/assets/85617864/e92814c2-3e71-4c5b-aa2d-d0f1abab317b">
+<img width="380" alt="11" src="https://github.com/neecao/master/assets/85617864/65be78fe-eafc-4c4a-aeff-66a523343039">
+
+    desc runner_orders_temp
+<img width="258" alt="Capture d'écran 2024-04-29 202832" src="https://github.com/neecao/master/assets/85617864/5747b55c-2582-4b7b-ae40-e4441e859d3e">
 
 ##### Original customer_orders table
 <img width="328" alt="2" src="https://github.com/neecao/master/assets/85617864/73530827-5863-45bf-ae27-98cabd5889e4">
 
 ##### Steps taken: 
-- Format empty cell in exclusions and extras to have null value
+- Format null value or 'null' string in exclusions and extras to be blank
 
         CREATE temporary TABLE customer_orders_temp
           SELECT order_id,
@@ -88,7 +91,7 @@ Treating null values and formating data types in the customer_orders and runner_
                     end as extras,
                   order_time
           FROM   customer_orders;
-  
+
   ##### Cleaned version
 <img width="326" alt="Capture d’écran 2024-04-27 172813" src="https://github.com/neecao/master/assets/85617864/d709559b-3379-4ac8-87f6-08403bff8617">
 
