@@ -107,6 +107,11 @@ Treating null values and formating data types in the customer_orders and runner_
     FROM
         customer_orders_temp
 
+
+2. How many unique customer orders were made?
+   
+
+
 <img width="61" alt="Capture d'écran 2024-04-29 204215" src="https://github.com/neecao/master/assets/85617864/4f8ae80c-18c8-4322-a480-d2dcade2b460">
 
 
