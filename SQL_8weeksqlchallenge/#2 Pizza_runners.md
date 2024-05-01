@@ -170,14 +170,62 @@ Treating null values and formating data types in the customer_orders and runner_
                 GROUP  BY order_id) tbl
         WHERE  rank_order = 1 
 
-<img width="200" alt="Capture d'écran 2024-05-01 200041" src = "https://github.com/neecao/master/assets/85617864/28833a5c-7372-4f80-b9fd-69ff4cc7f825">
+<img width="150" alt="Capture d'écran 2024-05-01 200041" src = "https://github.com/neecao/master/assets/85617864/28833a5c-7372-4f80-b9fd-69ff4cc7f825">
 
 ##### 7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
+              WITH change_tracker
+                   AS (SELECT customer_id,
+                              co.order_id,
+                              CASE
+                                WHEN exclusions IS NOT NULL
+                                      OR extras IS NOT NULL THEN 1
+                                ELSE 0
+                              END AS change_count,
+                              CASE
+                                WHEN exclusions IS NULL
+                                     AND extras IS NULL THEN 1
+                                ELSE 0
+                              END AS no_change_count
+                       FROM   customer_orders_temp co
+                              JOIN runner_orders_temp ro
+                                ON co.order_id = ro.order_id
+                       WHERE  duration != 0)
+              SELECT customer_id,
+                     Sum(change_count)    AS pizza_change,
+                     Sum(no_change_count) AS pizza_no_change
+              FROM   change_tracker
+              GROUP  BY customer_id 
+<img width="250" alt="Capture d'écran 2024-05-01 215702" src="https://github.com/neecao/master/assets/85617864/a4d6cc8b-919b-46eb-8e7b-31e72f96cdff">
+
 ##### 8.  How many pizzas were delivered that had both exclusions and extras?
+              SELECT Count(co.order_id) AS extras_exclusions
+              FROM   customer_orders_temp co
+                     JOIN runner_orders_temp ro
+                       ON co.order_id = ro.order_id
+              WHERE  duration != 0
+                     AND exclusions IS NOT NULL
+                     AND extras IS NOT NULL 
+                     
+<img width="150" alt="Capture d'écran 2024-05-01 220724" src="https://github.com/neecao/master/assets/85617864/1ac879d6-a462-4e8d-9a33-2f30d8815d20">
+
 ##### 9. What was the total volume of pizzas ordered for each hour of the day?
+        SELECT Hour(order_time) AS hour_of_day,
+               Count(order_id)  AS count_order
+        FROM   customer_orders_temp
+        GROUP  BY hour_of_day
+        ORDER  BY hour_of_day 
+
+<img width="150" alt="Capture d'écran 2024-05-01 222646" src="https://github.com/neecao/master/assets/85617864/2e18d381-e047-4977-82bf-50b848970d10">
+      
 #### 10. What was the volume of orders for each day of the week?
 
-
+          SELECT Dayname(order_time) AS day_of_week,
+                 Count(order_id)     AS count_order
+          FROM   customer_orders_temp
+          GROUP  BY day_of_week
+          ORDER  BY count_order desc 
+          
+<img width="350" alt="Capture d'écran 2024-05-01 223127" src="https://github.com/neecao/master/assets/85617864/441ea2a1-9b3c-4309-aec6-62bc23a47593">
 
 <div id='bonus'/>
 
