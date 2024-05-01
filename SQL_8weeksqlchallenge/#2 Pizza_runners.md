@@ -148,7 +148,30 @@ Treating null values and formating data types in the customer_orders and runner_
 <img width="120" alt="Capture d'écran 2024-05-01 175318" src="https://github.com/neecao/master/assets/85617864/a6b5b6e1-1c67-4b7b-8206-b071e1a5fda5">
 
 ##### 5. How many Vegetarian and Meatlovers were ordered by each customer?
+          SELECT 
+              customer_id, pizza_name, COUNT(order_id) AS count
+          FROM
+              customer_orders_temp co
+                  JOIN
+              pizza_names n ON n.pizza_id = co.pizza_id
+          GROUP BY pizza_name , customer_id
+          ORDER BY customer_id
+<img width="200" alt="Capture d'écran 2024-05-01 180631" src = "https://github.com/neecao/master/assets/85617864/80a56ca1-7bbd-4f6a-95a6-9c81ffad32f0">
+
 ##### 6. What was the maximum number of pizzas delivered in a single order?
+        SELECT order_id,
+               count
+        FROM   (SELECT order_id,
+                       Count(pizza_id) AS count,
+                       Rank()
+                         OVER (
+                           ORDER BY Count(pizza_id) DESC ) AS rank_order
+                FROM   customer_orders_temp
+                GROUP  BY order_id) tbl
+        WHERE  rank_order = 1 
+
+<img width="200" alt="Capture d'écran 2024-05-01 200041" src = "https://github.com/neecao/master/assets/85617864/28833a5c-7372-4f80-b9fd-69ff4cc7f825">
+
 ##### 7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
 ##### 8.  How many pizzas were delivered that had both exclusions and extras?
 ##### 9. What was the total volume of pizzas ordered for each hour of the day?
