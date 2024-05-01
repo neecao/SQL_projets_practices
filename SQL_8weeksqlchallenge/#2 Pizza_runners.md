@@ -116,7 +116,7 @@ Treating null values and formating data types in the customer_orders and runner_
           FROM
               customer_orders_temp
    
-<img width="61" alt="Capture d'écran 2024-04-29 204215" src="https://github.com/neecao/master/assets/85617864/4f8ae80c-18c8-4322-a480-d2dcade2b460">
+<p align="center"> <img width="120" alt="Capture d'écran 2024-04-29 204215" src="https://github.com/neecao/master/assets/85617864/4f8ae80c-18c8-4322-a480-d2dcade2b460">
 
 ##### 2. How many unique customer orders were made?
         SELECT 
@@ -124,7 +124,7 @@ Treating null values and formating data types in the customer_orders and runner_
         FROM
             customer_orders_temp
 
-<img width="120" alt="Capture d'écran 2024-05-01 171350" src = "https://github.com/neecao/master/assets/85617864/ebc63641-da9f-44aa-9eb5-04b7c5fdeab0">
+<p align="center"> <img width="120" alt="Capture d'écran 2024-05-01 171350" src = "https://github.com/neecao/master/assets/85617864/ebc63641-da9f-44aa-9eb5-04b7c5fdeab0">
 
 ##### 3. How many successful orders were delivered by each runner?
         SELECT 
@@ -134,7 +134,7 @@ Treating null values and formating data types in the customer_orders and runner_
         GROUP BY runner_id
         ORDER BY runner_id
         
-<img width="120" alt="Capture d'écran 2024-05-01 171829" src ="https://github.com/neecao/master/assets/85617864/ddbf277e-e8e4-4661-a5b5-8eddb37d2cf2">
+<p align="center"> <img width="120" alt="Capture d'écran 2024-05-01 171829" src ="https://github.com/neecao/master/assets/85617864/ddbf277e-e8e4-4661-a5b5-8eddb37d2cf2">
 
 ##### 4. How many of each type of pizza was delivered?
         SELECT 
@@ -145,7 +145,7 @@ Treating null values and formating data types in the customer_orders and runner_
             pizza_names n ON n.pizza_id = co.pizza_id
         GROUP BY pizza_name
 
-<img width="120" alt="Capture d'écran 2024-05-01 175318" src="https://github.com/neecao/master/assets/85617864/a6b5b6e1-1c67-4b7b-8206-b071e1a5fda5">
+<p align="center"> <img width="120" alt="Capture d'écran 2024-05-01 175318" src="https://github.com/neecao/master/assets/85617864/a6b5b6e1-1c67-4b7b-8206-b071e1a5fda5">
 
 ##### 5. How many Vegetarian and Meatlovers were ordered by each customer?
           SELECT 
@@ -156,7 +156,7 @@ Treating null values and formating data types in the customer_orders and runner_
               pizza_names n ON n.pizza_id = co.pizza_id
           GROUP BY pizza_name , customer_id
           ORDER BY customer_id
-<img width="200" alt="Capture d'écran 2024-05-01 180631" src = "https://github.com/neecao/master/assets/85617864/80a56ca1-7bbd-4f6a-95a6-9c81ffad32f0">
+<p align="center"> <img width="200" alt="Capture d'écran 2024-05-01 180631" src = "https://github.com/neecao/master/assets/85617864/80a56ca1-7bbd-4f6a-95a6-9c81ffad32f0">
 
 ##### 6. What was the maximum number of pizzas delivered in a single order?
         SELECT order_id,
@@ -170,7 +170,7 @@ Treating null values and formating data types in the customer_orders and runner_
                 GROUP  BY order_id) tbl
         WHERE  rank_order = 1 
 
-<img width="150" alt="Capture d'écran 2024-05-01 200041" src = "https://github.com/neecao/master/assets/85617864/28833a5c-7372-4f80-b9fd-69ff4cc7f825">
+<p align="center"> <img width="120" alt="Capture d'écran 2024-05-01 200041" src = "https://github.com/neecao/master/assets/85617864/28833a5c-7372-4f80-b9fd-69ff4cc7f825">
 
 ##### 7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
               WITH change_tracker
@@ -195,7 +195,7 @@ Treating null values and formating data types in the customer_orders and runner_
                      Sum(no_change_count) AS pizza_no_change
               FROM   change_tracker
               GROUP  BY customer_id 
-<img width="250" alt="Capture d'écran 2024-05-01 215702" src="https://github.com/neecao/master/assets/85617864/a4d6cc8b-919b-46eb-8e7b-31e72f96cdff">
+<p align="center"> <img width="250" alt="Capture d'écran 2024-05-01 215702" src="https://github.com/neecao/master/assets/85617864/a4d6cc8b-919b-46eb-8e7b-31e72f96cdff">
 
 ##### 8.  How many pizzas were delivered that had both exclusions and extras?
               SELECT Count(co.order_id) AS extras_exclusions
@@ -206,7 +206,7 @@ Treating null values and formating data types in the customer_orders and runner_
                      AND exclusions IS NOT NULL
                      AND extras IS NOT NULL 
                      
-<img width="150" alt="Capture d'écran 2024-05-01 220724" src="https://github.com/neecao/master/assets/85617864/1ac879d6-a462-4e8d-9a33-2f30d8815d20">
+<p align="center"> <img width="120" alt="Capture d'écran 2024-05-01 220724" src="https://github.com/neecao/master/assets/85617864/1ac879d6-a462-4e8d-9a33-2f30d8815d20">
 
 ##### 9. What was the total volume of pizzas ordered for each hour of the day?
         SELECT Hour(order_time) AS hour_of_day,
@@ -215,7 +215,7 @@ Treating null values and formating data types in the customer_orders and runner_
         GROUP  BY hour_of_day
         ORDER  BY hour_of_day 
 
-<img width="150" alt="Capture d'écran 2024-05-01 222646" src="https://github.com/neecao/master/assets/85617864/2e18d381-e047-4977-82bf-50b848970d10">
+<p align="center"> <img width="200" alt="Capture d'écran 2024-05-01 222646" src="https://github.com/neecao/master/assets/85617864/2e18d381-e047-4977-82bf-50b848970d10">
       
 #### 10. What was the volume of orders for each day of the week?
 
@@ -225,7 +225,8 @@ Treating null values and formating data types in the customer_orders and runner_
           GROUP  BY day_of_week
           ORDER  BY count_order desc 
           
-<img width="350" alt="Capture d'écran 2024-05-01 223127" src="https://github.com/neecao/master/assets/85617864/441ea2a1-9b3c-4309-aec6-62bc23a47593">
+<p align="center">  <img width="200" alt="Capture d'écran 2024-05-01 223931" src="https://github.com/neecao/master/assets/85617864/6192dd0c-106c-46f8-a030-bf1cb93e3bff">
+
 
 <div id='bonus'/>
 
