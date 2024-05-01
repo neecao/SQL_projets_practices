@@ -110,6 +110,12 @@ Treating null values and formating data types in the customer_orders and runner_
 
 2. How many unique customer orders were made?
    
+    SELECT 
+        COUNT(DISTINCT order_id) AS count_unique_order
+    FROM
+        customer_orders_temp
+
+   ![Capture d'écran 2024-05-01 170557](https://github.com/neecao/master/assets/85617864/bce7eaa6-9f47-40d9-beef-c041bbfb966c)
 
 
 <img width="61" alt="Capture d'écran 2024-04-29 204215" src="https://github.com/neecao/master/assets/85617864/4f8ae80c-18c8-4322-a480-d2dcade2b460">
