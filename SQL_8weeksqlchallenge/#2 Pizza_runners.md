@@ -95,30 +95,65 @@ Treating null values and formating data types in the customer_orders and runner_
   ##### Cleaned version
 <img width="326" alt="Capture d’écran 2024-04-27 172813" src="https://github.com/neecao/master/assets/85617864/d709559b-3379-4ac8-87f6-08403bff8617">
 
+##### Add space between 'Meatlovers' in table pizza_names
+      SET SQL_SAFE_UPDATES = 0;
+      UPDATE pizza_names 
+      SET 
+          pizza_name = REPLACE(pizza_name,
+              'Meatlovers',
+              'Meat lovers')
+      WHERE
+          pizza_id = '1'
 
 <div id='question'/>
 
 ### Case Study Questions + Solutions
 #### A. Pizza Metrics
-1. How many pizzas were ordered?
+##### 1. How many pizzas were ordered?
    
-    SELECT 
-        COUNT(pizza_id) AS total_pizza
-    FROM
-        customer_orders_temp
-
-
-2. How many unique customer orders were made?
+          SELECT 
+              COUNT(pizza_id) AS total_pizza
+          FROM
+              customer_orders_temp
    
-    SELECT 
-        COUNT(DISTINCT order_id) AS count_unique_order
-    FROM
-        customer_orders_temp
-
-   ![Capture d'écran 2024-05-01 170557](https://github.com/neecao/master/assets/85617864/bce7eaa6-9f47-40d9-beef-c041bbfb966c)
-
-
 <img width="61" alt="Capture d'écran 2024-04-29 204215" src="https://github.com/neecao/master/assets/85617864/4f8ae80c-18c8-4322-a480-d2dcade2b460">
+
+##### 2. How many unique customer orders were made?
+        SELECT 
+            COUNT(DISTINCT order_id) AS count_unique_order
+        FROM
+            customer_orders_temp
+
+<img width="120" alt="Capture d'écran 2024-05-01 171350" src = "https://github.com/neecao/master/assets/85617864/ebc63641-da9f-44aa-9eb5-04b7c5fdeab0">
+
+##### 3. How many successful orders were delivered by each runner?
+        SELECT 
+            runner_id, COUNT(order_id) AS count_order
+        FROM
+            runner_orders_temp
+        GROUP BY runner_id
+        ORDER BY runner_id
+        
+<img width="120" alt="Capture d'écran 2024-05-01 171829" src ="https://github.com/neecao/master/assets/85617864/ddbf277e-e8e4-4661-a5b5-8eddb37d2cf2">
+
+##### 4. How many of each type of pizza was delivered?
+        SELECT 
+            pizza_name, COUNT(order_id) AS count
+        FROM
+            customer_orders_temp co
+                JOIN
+            pizza_names n ON n.pizza_id = co.pizza_id
+        GROUP BY pizza_name
+
+<img width="120" alt="Capture d'écran 2024-05-01 175318" src="https://github.com/neecao/master/assets/85617864/a6b5b6e1-1c67-4b7b-8206-b071e1a5fda5">
+
+##### 5. How many Vegetarian and Meatlovers were ordered by each customer?
+##### 6. What was the maximum number of pizzas delivered in a single order?
+##### 7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
+##### 8.  How many pizzas were delivered that had both exclusions and extras?
+##### 9. What was the total volume of pizzas ordered for each hour of the day?
+#### 10. What was the volume of orders for each day of the week?
+
 
 
 <div id='bonus'/>
