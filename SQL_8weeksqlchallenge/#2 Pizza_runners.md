@@ -227,12 +227,24 @@ Treating null values and formating data types in the customer_orders and runner_
           
 <p align="center">  <img width="200" alt="Capture d'écran 2024-05-01 223931" src="https://github.com/neecao/master/assets/85617864/6192dd0c-106c-46f8-a030-bf1cb93e3bff">
 
+#### B. Runner and Customer Experience
+##### 1. How many runners signed up for each 1 week period? (i.e. week starts 2021-01-01)
+
         SELECT 
             COUNT(*),
             WEEK(registration_date, '2021-01-01') AS week_number
         FROM
             runners
         GROUP BY WEEK(registration_date, '2021-01-01')
+##### 2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
+##### 3. Is there any relationship between the number of pizzas and how long the order takes to prepare?
+##### 4. What was the average distance travelled for each customer?
+##### 5. What was the difference between the longest and shortest delivery times for all orders?
+##### 6. What was the average speed for each runner for each delivery and do you notice any trend for these values?
+##### 7. What is the successful delivery percentage for each runner?
+
+
+<img width="139" alt="Capture d'écran 2024-05-02 195442" src="https://github.com/neecao/SQL_projets_practices/assets/85617864/d1d43dd1-a623-4493-9ae8-ab544902ff3e">
 
 <div id='bonus'/>
 
