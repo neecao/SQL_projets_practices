@@ -277,6 +277,19 @@ Treating null values and formating data types in the customer_orders and runner_
 
         
 ##### 4. What was the average distance travelled for each customer?
+
+        SELECT 
+            customer_id, ROUND(AVG(distance), 2)
+        FROM
+            customer_orders_temp c
+                JOIN
+            runner_orders_temp r ON c.order_id = r.order_id
+        WHERE
+            distance != 0
+        GROUP BY customer_id
+        
+<img width="142" alt="Capture d'écran 2024-05-02 221657" src="https://github.com/neecao/SQL_projets_practices/assets/85617864/2033a82e-df22-40dd-8544-7fb2f74bf7a3">
+
 ##### 5. What was the difference between the longest and shortest delivery times for all orders?
 ##### 6. What was the average speed for each runner for each delivery and do you notice any trend for these values?
 ##### 7. What is the successful delivery percentage for each runner?
