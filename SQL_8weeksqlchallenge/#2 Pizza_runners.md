@@ -227,6 +227,12 @@ Treating null values and formating data types in the customer_orders and runner_
           
 <p align="center">  <img width="200" alt="Capture d'écran 2024-05-01 223931" src="https://github.com/neecao/master/assets/85617864/6192dd0c-106c-46f8-a030-bf1cb93e3bff">
 
+        SELECT 
+            COUNT(*),
+            WEEK(registration_date, '2021-01-01') AS week_number
+        FROM
+            runners
+        GROUP BY WEEK(registration_date, '2021-01-01')
 
 <div id='bonus'/>
 
