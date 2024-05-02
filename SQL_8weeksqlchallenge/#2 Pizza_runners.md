@@ -236,15 +236,52 @@ Treating null values and formating data types in the customer_orders and runner_
         FROM
             runners
         GROUP BY WEEK(registration_date, '2021-01-01')
+        
+<img width="150" alt="Capture d'écran 2024-05-02 195442" src="https://github.com/neecao/SQL_projets_practices/assets/85617864/58dcec1e-5ae2-439d-a1b0-f0568b103642">
+
 ##### 2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
+      
+      SELECT 
+          runner_id, AVG(duration) as average_arrival
+      FROM
+          (SELECT DISTINCT
+              runner_id,
+                  TIMESTAMPDIFF(MINUTE, order_time, pickup_time) AS duration
+          FROM
+              customer_orders_temp c
+          JOIN runner_orders_temp r ON r.order_id = c.order_id
+          WHERE
+              pickup_time > 0) tbl
+      GROUP BY runner_id
+
+<img width="150" alt="Capture d'écran 2024-05-02 212339" src="https://github.com/neecao/SQL_projets_practices/assets/85617864/1e43292c-2665-4066-921c-5c20912b9c4d">
+      
 ##### 3. Is there any relationship between the number of pizzas and how long the order takes to prepare?
+
+        SELECT 
+            num_pizza, AVG(duration)
+        FROM
+            (SELECT DISTINCT
+                c.order_id,
+                    COUNT(c.pizza_id) AS num_pizza,
+                    TIMESTAMPDIFF(MINUTE, order_time, pickup_time) AS duration
+            FROM
+                customer_orders_temp c
+            JOIN runner_orders_temp r ON r.order_id = c.order_id
+            WHERE
+                pickup_time > 0
+            GROUP BY c.order_id) tbl
+        GROUP BY num_pizza
+        
+<img width="150" alt="Capture d'écran 2024-05-02 220107" src="https://github.com/neecao/SQL_projets_practices/assets/85617864/97ca9f92-96cd-4816-880b-425be1116d01">
+
+        
 ##### 4. What was the average distance travelled for each customer?
 ##### 5. What was the difference between the longest and shortest delivery times for all orders?
 ##### 6. What was the average speed for each runner for each delivery and do you notice any trend for these values?
 ##### 7. What is the successful delivery percentage for each runner?
 
 
-<img width="139" alt="Capture d'écran 2024-05-02 195442" src="https://github.com/neecao/SQL_projets_practices/assets/85617864/d1d43dd1-a623-4493-9ae8-ab544902ff3e">
 
 <div id='bonus'/>
 
