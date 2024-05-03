@@ -332,6 +332,18 @@ Treating null values and formating data types in the customer_orders and runner_
 
 <img width="200" alt="Capture d'écran 2024-05-03 101721" src="https://github.com/neecao/SQL_projets_practices/assets/85617864/9c4813b5-6c38-4649-810e-50e13234720c">
 
+#### C. Ingredient Optimisation
+##### 1. What are the standard ingredients for each pizza?
+##### 2. What was the most commonly added extra?
+##### 3. What was the most common exclusion?
+##### 4. Generate an order item for each record in the customers_orders table in the format of one of the following:
+- _Meat Lovers_
+- _Meat Lovers - Exclude Beef_
+- _Meat Lovers - Extra Bacon_
+- _Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers_
+##### 5. Generate an alphabetically ordered comma separated ingredient list for each pizza order from the customer_orders table and add a 2x in front of any relevant ingredients. For example: "Meat Lovers: 2xBacon, Beef, ... , Salami"
+##### 6. What is the total quantity of each ingredient used in all delivered pizzas sorted by most frequent first?
+
 <div id='bonus'/>
 
 ### Bonus Questions + Solutions
