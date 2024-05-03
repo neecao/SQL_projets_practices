@@ -291,10 +291,46 @@ Treating null values and formating data types in the customer_orders and runner_
 <img width="142" alt="Capture d'écran 2024-05-02 221657" src="https://github.com/neecao/SQL_projets_practices/assets/85617864/2033a82e-df22-40dd-8544-7fb2f74bf7a3">
 
 ##### 5. What was the difference between the longest and shortest delivery times for all orders?
+
+        SELECT 
+            MAX(duration) - MIN(duration) AS difference
+        FROM
+            runner_orders_temp
+        WHERE
+            duration != 0
+
+<img width="62" alt="Capture d’écran 2024-05-03 094655" src="https://github.com/neecao/SQL_projets_practices/assets/85617864/f70ed300-fbfe-4949-bcb5-e55eb2b0b8a5">
+
 ##### 6. What was the average speed for each runner for each delivery and do you notice any trend for these values?
+
+        SELECT runner_id
+        	,order_id
+        	,round(distance / (duration / 60), 2) AS speed_kmh
+        	,round(avg(distance / (duration / 60)) OVER (PARTITION BY runner_id), 2) AS runner_avgspeed
+        FROM runner_orders_temp
+        WHERE duration != 0
+        ORDER BY runner_id
+        
+![Capture d'écran 2024-05-03 100140](https://github.com/neecao/SQL_projets_practices/assets/85617864/7882a6fb-e4ce-41b9-8b46-c1abc3441b0a)
+
 ##### 7. What is the successful delivery percentage for each runner?
 
+        SELECT 
+            runner_id,
+            ROUND((success_order / all_order) * 100) AS success_rate
+        FROM
+            (SELECT 
+                runner_id,
+                    SUM(CASE
+                        WHEN pickup_time != '' THEN 1
+                        ELSE 0
+                    END) AS success_order,
+                    COUNT(order_id) AS all_order
+            FROM
+                runner_orders
+            GROUP BY runner_id) tbl
 
+![Capture d'écran 2024-05-03 101721](https://github.com/neecao/SQL_projets_practices/assets/85617864/9c4813b5-6c38-4649-810e-50e13234720c)
 
 <div id='bonus'/>
 
