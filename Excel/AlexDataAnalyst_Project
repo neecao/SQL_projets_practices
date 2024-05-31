@@ -1,0 +1,12 @@
+## Data cleaning steps	
+1. Generate a duplicate for preservation in case of errors.
+2.	Remove duplicates 
+3.	Standardize the data 
+-	President (Col. C): Use function Proper to capitalizes the first letter to enhance readability.
+-	Prior (Col. D): Use function Trim to remove extra spaces.
+-	Party (Col. E): Standardize misspells. 
+-	Vice (Col. F): Use function Trim to remove extra spaces.
+-	Salary (Col. G): Format data type from currency to number
+-	Date Updated, Date Created (Col. H,I): Format to short date
+4.	Delete irrelevant information
+-	Col. A, Prior (Col.D): Exclude columns that do not contribute to generating valuable insights
